@@ -37,6 +37,19 @@ Frontend: white -> *:8081
 
 ## How to use
 - Add **IPs**, **username** and **password** to config file (you can contenerized it and manage secret with k8s)
+```bash
+# You can use comma
+DP_URL="127.0.0.1:5555,127.0.0.1:5556,127.0.0.1:5557"
+
+# Or whitespace
+DP_URL="127.0.0.1:5555 127.0.0.1:5556 127.0.0.1:5557"
+
+# Or even line return
+DP_URL="127.0.0.1:5555
+127.0.0.1:5556
+127.0.0.1:5557"
+```
+
 - Launch it
 ```bash
 bash dataplane_request.sh
