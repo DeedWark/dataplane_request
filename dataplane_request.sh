@@ -4,6 +4,8 @@
 # Date: 2022-06-20
 # Version: 1.0.0
 
+set -eo pipefail +x
+
 CONFIG_FILE="./config"
 
 setup() {
