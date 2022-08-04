@@ -14,7 +14,7 @@ setup() {
             printf "[ERROR] - I cannot find any username or password, sorry sir!\n" >&2
             exit 2
         else
-            if [[ -z "${URL}" ]]; then
+            if [[ -z "${DP_URL}" ]]; then
                 printf "[ERROR] - No IP provided\n" >&2
                 exit 2
             fi
@@ -30,22 +30,21 @@ setup() {
     #-- Get all IPs presents in the config file --#
     declare -ag DATAPLANE_URL
     #-- Check if there is comma --#
-    if [[ "${URL}" == *,* ]]; then
-        for ip in $(tr ',' '\n' <<<"${URL}"); do
+    if [[ "${DP_URL}" == *,* ]]; then
+        for url in $(tr ',' '\n' <<<"${DP_URL}"); do
             DATAPLANE_URL+=("${ip}")
         done
         #-- Check if there is whitespace --#
-    elif [[ "${URL}" =~ \  ]]; then
-        for ip in $(tr ' ' '\n' <<<"${URL}"); do
+    elif [[ "${DP_URL}" =~ \  ]]; then
+        for url in $(tr ' ' '\n' <<<"${DP_URL}"); do
             DATAPLANE_URL+=("${ip}")
         done
-    elif [[ "${URL}" == *$'\n'* ]]; then
+    elif [[ "${DP_URL}" == *$'\n'* ]]; then
         while read -r ip; do
             DATAPLANE_URL+=("${ip}")
-        done <<<"${URL}"
+        done <<<"${DP_URL}"
     else
-        printf "[ERROR] - Bad IP format!\n" >&2
-        exit 2
+        DATAPLANE_URL+=("${DP_URL}")
     fi
 }
 
